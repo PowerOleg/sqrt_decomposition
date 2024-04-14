@@ -20,7 +20,7 @@ void preprocessing(int* arr, int* sqrt_memory, int blocks_quantity, const int bl
     for (int block_number = 1; block_number <= blocks_quantity; block_number++)//blocks stats from 1 just to convert for example from 1 block to 3 index 
     {
        int min_of_block = get_min_of_block(arr, block_number, block_length);
-       sqrt_memory[block_number] = min_of_block;
+       sqrt_memory[block_number - 1] = min_of_block;
     }
 }
 
@@ -29,7 +29,6 @@ int get_min(int* arr, int size, int left_index, int right_index, int* sqrt_memor
     int min = 2140000000;//TODO
     int left_up = 2;//номер левого блока который полностью покрывается интвервалом//the block number from the left which inside the range//need to calculate but I'm too lazy//TODO
     int right_down = 2;//номер правого блока который покрывается те внутри интервала//the block number from the right which inside the range//need to calculate but I'm too lazy//TODO
-    min = sqrt_memory[left_up - 1];
     for (int i = left_index; i < (left_up - 1) * blocks_quantity; i++)
     {
         if (arr[i] < min)
@@ -39,9 +38,9 @@ int get_min(int* arr, int size, int left_index, int right_index, int* sqrt_memor
     }
     for (int i = left_up; i <= right_down; i++)//remember block number starts from 1 and ends with 3
     {
-        if (sqrt_memory[i] < min)
+        if (sqrt_memory[i - 1] < min)
         {
-            min = sqrt_memory[i];
+            min = sqrt_memory[i - 1];
         }
     }
     for (int i = right_down * blocks_quantity; i < right_index; i++)
@@ -69,8 +68,8 @@ int main()
 
     
     int min = get_min(arr, size, left_index, right_index, sqrt_memory, blocks_quantity);
-
-    std::cout << "SQRT decomposition" << min << ": " ;
+    std::cout << "SQRT decomposition" << std::endl;
+    std::cout << "In the range from " << left_index << " to " << right_index << " min is " << min;
     delete[] sqrt_memory;
 }
 
