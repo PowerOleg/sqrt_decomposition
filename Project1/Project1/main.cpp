@@ -24,11 +24,14 @@ void preprocessing(int* arr, int* sqrt_memory, int blocks_quantity, const int bl
     }
 }
 
-int get_min(int* arr, int size, int left_index, int right_index, int* sqrt_memory)
+int get_min(int* arr, int size, int left_index, int right_index, int* sqrt_memory, int blocks_quantity)
 {
-    int left_up = 1;//the block number that touched by left_index
-    int right_down = 3;//the block number that touched by right_index
-    
+    int ans = -1;
+    int left_up = 2;//номер левого блока который полностью покрывается интвервалом//the block number from the left which inside the range//need to calculate but I'm too lazy//TODO
+    int right_down = 2;//номер правого блока который покрывается те внутри интервала//the block number from the right which inside the range//need to calculate but I'm too lazy//TODO
+    ans = sqrt_memory[left_up - 1];
+
+
 
 
     return 0;
@@ -48,7 +51,7 @@ int main()
     preprocessing(arr, sqrt_memory, blocks_quantity, block_length);
 
     
-    int min = get_min(arr, size, left_index, right_index, sqrt_memory);
+    int min = get_min(arr, size, left_index, right_index, sqrt_memory, blocks_quantity);
 
     std::cout << "SQRT decomposition" << min << ": " ;
     delete[] sqrt_memory;
